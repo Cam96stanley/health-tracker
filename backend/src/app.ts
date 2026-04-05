@@ -2,6 +2,7 @@ import cors from "cors";
 import express from "express";
 import swaggerUi from "swagger-ui-express";
 import errorHandler from "./middleware/errorHandler.ts";
+import entryRoutes from "./routes/entry.routes.ts";
 import userRoutes from "./routes/user.routes.ts";
 import { swaggerSpec } from "./swagger.ts";
 
@@ -19,6 +20,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Routes
 
 app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/entries", entryRoutes);
 
 app.use(errorHandler);
 
