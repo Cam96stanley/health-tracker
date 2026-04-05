@@ -1,9 +1,8 @@
 import type { Request, Response } from "express";
+import AppError from "../lib/AppError.ts";
 import asyncHandler from "../lib/asyncHandler.ts";
 import userServices from "../services/user.services.ts";
 import { createUserSchema, loginUserSchema } from "../types/user.types.ts";
-import type { AuthRequest } from "../types/index.ts";
-import AppError from "../lib/AppError.ts";
 
 const signup = asyncHandler(async (req: Request, res: Response) => {
   const body = createUserSchema.parse(req.body);
@@ -17,7 +16,7 @@ const login = asyncHandler(async (req: Request, res: Response) => {
   res.status(200).json(token);
 });
 
-const getMe = asyncHandler(async (req: AuthRequest, res: Response) => {
+const getMe = asyncHandler(async (req: Request, res: Response) => {
   if (!req.userId) {
     throw new AppError(401, "Unauthorized");
   }
