@@ -22,3 +22,7 @@ export const createEntrySchema = z.object({
 });
 
 export type CreateEntryInput = z.infer<typeof createEntrySchema>;
+
+export const updateEntrySchema = createEntrySchema.partial();
+
+export type UpdateEntryInput = z.infer<typeof updateEntrySchema>;
