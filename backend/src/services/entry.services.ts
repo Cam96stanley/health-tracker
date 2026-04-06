@@ -76,4 +76,14 @@ const updateEntry = async (
   return updatedEntry;
 };
 
-export default { createEntry, getEntry, updateEntry };
+const getEntries = async (userId: string) => {
+  const entries = await prisma.entry.findMany({
+    where: { userId },
+    include: { symptoms: true, medications: true },
+    orderBy: { date: "desc" },
+  });
+
+  return entries;
+};
+
+export default { createEntry, getEntry, updateEntry, getEntries };
