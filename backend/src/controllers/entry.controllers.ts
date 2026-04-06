@@ -37,4 +37,12 @@ const updateEntry = asyncHandler(async (req: Request, res: Response) => {
   res.status(200).json(entry);
 });
 
-export default { createEntry, getEntry, updateEntry };
+const getEntries = asyncHandler(async (req: Request, res: Response) => {
+  if (!req.userId) {
+    throw new AppError(401, "Unauthorized");
+  }
+  const entries = await entryServices.getEntries(req.userId);
+  res.status(200).json(entries);
+});
+
+export default { createEntry, getEntry, updateEntry, getEntries };

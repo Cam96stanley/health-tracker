@@ -4,7 +4,10 @@ import auth from "../middleware/auth.ts";
 
 const router = Router();
 
-router.route("/").post(auth, entryControllers.createEntry);
+router
+  .route("/")
+  .post(auth, entryControllers.createEntry)
+  .get(auth, entryControllers.getEntries);
 router
   .route("/:id")
   .get(auth, entryControllers.getEntry)
