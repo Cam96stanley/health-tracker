@@ -17,7 +17,10 @@ const getEntry = asyncHandler(async (req: Request, res: Response) => {
   if (!req.userId) {
     throw new AppError(401, "Unauthorized");
   }
-  const entry = await entryServices.getEntry(req.userId, req.params.id as string);
+  const entry = await entryServices.getEntry(
+    req.userId,
+    req.params.id as string,
+  );
   res.status(200).json(entry);
 });
 
@@ -26,7 +29,11 @@ const updateEntry = asyncHandler(async (req: Request, res: Response) => {
     throw new AppError(401, "Unauthorized");
   }
   const body = updateEntrySchema.parse(req.body);
-  const entry = await entryServices.updateEntry(req.userId, req.params.id as string, body);
+  const entry = await entryServices.updateEntry(
+    req.userId,
+    req.params.id as string,
+    body,
+  );
   res.status(200).json(entry);
 });
 
