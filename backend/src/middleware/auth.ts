@@ -1,10 +1,9 @@
-import type { NextFunction, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import env from "../env.ts";
 import AppError from "../lib/AppError.ts";
-import type { AuthRequest } from "../types/index.ts";
 
-const auth = (req: AuthRequest, _res: Response, next: NextFunction) => {
+const auth = (req: Request, _res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader?.startsWith("Bearer ")) {
